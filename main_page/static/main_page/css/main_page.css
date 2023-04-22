@@ -1,0 +1,32 @@
+body{
+    background-color: #f6f6f6;
+}
+
+.navbar-custom {
+    background-color: #023246;
+}
+
+.navbar-nav .nav-link {
+    color: #f6f6f6;
+}
+
+.btn-sign-in {
+    background-color: #287094;
+}
+
+.row {
+    display: flex;
+    justify-content: center; /* горизонтальное центрирование содержимого */
+    align-items: center; /* вертикальное центрирование содержимого */
+}
+
+.row-wellcome {
+    margin-top: 20vh;
+}
+
+.row-about {
+    margin-top: 0vh;
+}
+
+
+
