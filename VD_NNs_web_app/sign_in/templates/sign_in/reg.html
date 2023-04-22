@@ -1,0 +1,73 @@
+{% load static %}
+<!doctype html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="{% static 'img/icons8-moon-96.png' %}" type='image/x-icon'>
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'sign_in/css/reg.css' %}">
+</head>
+<body class="text-center">    
+  <main class="form-signin">
+    <form>
+      <img class="mb-2" src="{% static 'img/icons8-moon-96.png' %}" alt="">
+      <h1 class="h3 mb-2 fw-normal">Регистрация</h1>
+
+      <div class="form-floating mb-1">
+        <input type="name" class="form-control" id="floatingName" placeholder="Name">
+        <label for="floatingName">Имя</label>
+      </div>
+
+      <div class="form-floating mb-1">
+        <input type="surname" class="form-control" id="floatingSurname" placeholder="Surname">
+        <label for="floatingSurname">Фамилия</label>
+      </div>
+
+      <div class="form-floating mb-1">
+        <div class="input-group">
+          <input type="date" class="form-control" id="floatingDate" placeholder="Date">
+          <label class="input-group-text" for="floatingDate">Дата рождения</label>
+        </div>
+      </div>
+
+      <div class="form-floating mb-1">
+        <select class="form-select" id="floatingGender" aria-label="Floating label select example">
+          <option selected>Откройте это меню выбора</option>
+          <option value="1">Мужской</option>
+          <option value="2">Женский</option>
+        </select>
+        <label for="floatingGender">Пол</label>
+      </div>
+
+      <div class="form-floating mb-1">
+        <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com">
+        <label for="floatingInput">Почта</label>
+      </div>
+
+      <div class="form-floating mb-1">
+        <input type="password" class="form-control" id="floatingPassword" placeholder="Password">
+        <label for="floatingPassword">Пароль</label>
+      </div>
+
+      <div class="form-floating mb-2">
+        <input type="password" class="form-control" id="floatingPassword" placeholder="Password">
+        <label for="floatingPassword">Повторите пароль</label>
+      </div>
+
+      <div class="form-floating mb-2">
+        <select class="form-select" id="floatingSelect" aria-label="Floating label select example">
+          <option selected>Откройте это меню выбора</option>
+          <option value="1">Пациент</option>
+          <option value="2">Доктор</option>
+        </select>
+        <label for="floatingSelect">Кто вы?</label>
+      </div>
+
+      <a class="btn w-100 btn-outline-light btn-reg d-flex justify-content-center align-items-center" href="">Зарегистрироваться</a>
+    </form>
+  </main>
+  </body>
+  </html>
+  
