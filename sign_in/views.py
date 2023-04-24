@@ -2,7 +2,7 @@ from django.shortcuts import render
 
 
 # Create your views here.
-def index(reguest):
+def sign_in_view(reguest):
     return render(reguest, 'sign_in/sign_in.html')
 
 
