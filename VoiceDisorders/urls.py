@@ -15,13 +15,17 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
+from django.template.context_processors import static
 from django.urls import path, include
 from django.conf import settings
-from django.conf.urls.static import static
+
+from VoiceDisorders_App import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('', include('main_page.urls')),
-    path('sign_in/', include('sign_in.urls')),
-    path('user_pa/', include('user_pa.urls'))
-] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+    path('', views.index),
+    path('sign_in/', views.sign_in_view),
+    path('reg/', views.reg),
+    path('user_pa/', views.user_pa_view)
+]
+# + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
