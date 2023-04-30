@@ -25,8 +25,9 @@ SECRET_KEY = 'django-insecure-sv2_8h46e0#$o0^3m)xblv@1ygdpkhq54i(&j*fhy4ctvx*ns3
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['dpo.fizteh.urfu.tech', 'dpo-fizteh-urfu-tech.illumined.local', 'localhost', '127.0.0.1']
 
+CSRF_TRUSTED_ORIGINS = ['https://dpo.fizteh.urfu.tech']
 
 # Application definition
 
@@ -55,7 +56,7 @@ ROOT_URLCONF = 'VoiceDisorders.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [BASE_DIR / 'templates']
+        'DIRS': [BASE_DIR / 'VoiceDisorders_App/templates']
         ,
         'APP_DIRS': True,
         'OPTIONS': {
@@ -77,8 +78,12 @@ WSGI_APPLICATION = 'VoiceDisorders.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql_psycopg2',
+        'NAME': 'myproject',
+        'USER': 'myprojectuser',
+        'PASSWORD': 'password',
+        'HOST': 'localhost',
+        'PORT': '',
     }
 }
 
@@ -119,11 +124,10 @@ USE_TZ = True
 
 STATIC_URL = 'static/'
 
-STATICFILES_DIRS = [
-    BASE_DIR / "static"
-]
-
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+import os
+STATIC_ROOT = os.path.join(BASE_DIR, 'VoiceDisorders_App/static')
