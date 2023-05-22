@@ -14,6 +14,29 @@ def index(reguest):
     return render(reguest, 'main_page/index.html')
 
 def sign_in_view(reguest):
+    if reguest.method == "POST":
+        data = reguest.POST
+        allUser = CustomUser.objects.all()
+        user = CustomUser(
+            email=data.get('userEmail'),
+            password=data.get('userPassword')
+        )
+
+        if(len(user.email) == 0 or len(user.password) == 0):
+            messages.info(reguest, 'Set all fields!')
+            return render(reguest, 'sign_in/sign_in.html')
+
+        if(allUser.filter(email=user.email)):
+            if(allUser.filter(password=user.password)):
+                messages.info(reguest, 'Success!')
+                return render(reguest, 'user_pa/user_pa.html')
+            else:
+                messages.info(reguest, 'Incorrect password!' )
+                return render(reguest, 'sign_in/sign_in.html')
+        else:
+            messages.info(reguest, 'User wasn\'t found')
+            return render(reguest, 'sign_in/sign_in.html')
+
     return render(reguest, 'sign_in/sign_in.html')
 
 def reg(reguest):
@@ -46,12 +69,13 @@ def reg(reguest):
             return render(reguest, 'sign_in/reg.html')
 
         except ObjectDoesNotExist:
-            messages.info(reguest, 'ObjectDoesNotExist')
+            messages.info(reguest, 'Any ObjectDoesNotExist'
+                                    'User was created!')
             user.save()
-            return HttpResponse("DONE!")
-
+            # return HttpResponse("DONE!")
+            return render(reguest, 'sign_in/sign_in.html')
         # except MultipleObjectsReturned:
-        
+
     else:
         return render(reguest, 'sign_in/reg.html')
 

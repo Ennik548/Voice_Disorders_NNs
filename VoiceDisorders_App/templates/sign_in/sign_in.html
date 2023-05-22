@@ -11,16 +11,21 @@
 </head>
 <body class="text-center">    
 <main class="form-signin">
-  <form>
+  <form method="post" action="/sign_in/"> {% csrf_token %}
+    {% if messages %}
+        {% for message in messages %}
+            {% if message.tags %}  <script>alert("{{ message }}")</script> {% endif %}
+        {% endfor %}
+    {% endif %}
     <img class="mb-2" src="{% static 'img/icons8-moon-96.png' %}" alt="">
     <h1 class="h3 mb-2 fw-normal">Вход</h1>
 
     <div class="form-floating mb-1">
-      <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com">
+      <input type="email" class="form-control" name='userEmail' id="floatingInput" placeholder="name@example.com">
       <label for="floatingInput">Почта</label>
     </div>
     <div class="form-floating mb-1">
-      <input type="password" class="form-control" id="floatingPassword" placeholder="Password">
+      <input type="password" class="form-control" name='userPassword' id="floatingPassword" placeholder="Password">
       <label for="floatingPassword">Пароль</label>
     </div>
 
@@ -29,7 +34,7 @@
         <input type="checkbox" value="remember-me"> Сохранить вход
       </label>
     </div>
-    <button class="btn w-100 btn-outline-light btn-sign-in mb-2" type="button">Войти</button>
+    <button type="submit" class="btn w-100 btn-outline-light btn-sign-in mb-2">Войти</button>
     <a class="btn w-100 btn-outline-light btn-reg d-flex justify-content-center align-items-center" href="/reg">Зарегистрироваться</a>
   </form>
 </main>
