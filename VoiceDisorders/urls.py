@@ -18,7 +18,6 @@ from django.contrib import admin
 from django.template.context_processors import static
 from django.urls import path, include
 from django.conf import settings
-
 from VoiceDisorders_App import views
 
 urlpatterns = [
