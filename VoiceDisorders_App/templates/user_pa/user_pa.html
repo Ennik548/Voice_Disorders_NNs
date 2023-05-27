@@ -3,6 +3,12 @@
 
 {% block title %}Имя пользователя{% endblock title %}
 
+{% block menu %}
+<a href="#" class="list-group-item list-group-item-action act" aria-current="true">
+  Запись
+</a>
+{% endblock menu %}
+
 {% block content%}
 <div class="container">
     <div class="container d-flex flex-column align-items-center">
@@ -14,6 +20,29 @@
         </div>
         <button type="submit" class="btn btn-outline-light btn-sign-in">Загрузить</button>
     </form>
+    </div>
+    <div>
+      <table class="table table-striped mt-5">
+        <thead>
+          <tr>
+            <th scope="col"></th>
+            <th scope="col">Дата записи</th>
+            <th scope="col">Результат</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th scope="row">1</th>
+            <td>Date</td>
+            <td>Result</td>
+          </tr>
+          <tr>
+            <th scope="row">2</th>
+            <td>Date</td>
+            <td>Result</td>
+          </tr>
+        </tbody>
+      </table>
     </div>
 </div>
 

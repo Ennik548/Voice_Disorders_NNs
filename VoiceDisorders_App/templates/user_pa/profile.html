@@ -1,0 +1,74 @@
+{% extends 'user_pa/user_layout.html' %}
+{% load static %}
+
+{% block title %}Имя пользователя{% endblock title %}
+
+{% block menu %}
+<a href="/user_pa" class="list-group-item list-group-item-action" aria-current="true">
+  Запись
+</a>
+{% endblock menu %}
+
+{% block content%}
+<div class="container">
+    <div class="text-center">
+<h1>Профиль пользователя</h1>
+
+<div id="profileView">
+    <p><strong>Имя:</strong> Иван</p>
+    <p><strong>Фамилия:</strong> Иванов</p>
+    <p><strong>Отчество:</strong> Иванович</p>
+    <p><strong>Email:</strong> ivan@example.com</p>
+    <p><strong>Дата рождения:</strong> 01.01.1990</p>
+    <button class="btn btn-outline-light btn-sign-in" onclick="editProfile()">Изменить данные</button>
+</div>
+
+<div id="profileEdit" style="display: none;">
+    <form>
+      <div class="mb-3">
+        <label for="name" class="form-label">Имя:</label>
+        <input type="text" class="form-control" id="name" value="Иван">
+      </div>
+
+      <div class="mb-3">
+        <label for="lastName" class="form-label">Фамилия:</label>
+        <input type="text" class="form-control" id="lastName" value="Иванов">
+      </div>
+
+      <div class="mb-3">
+        <label for="patronymic" class="form-label">Отчество:</label>
+        <input type="text" class="form-control" id="patronymic" value="Иванович">
+      </div>
+
+      <div class="mb-3">
+        <label for="email" class="form-label">Email:</label>
+        <input type="email" class="form-control" id="email" value="ivan@example.com">
+      </div>
+
+      <div class="mb-3">
+        <label for="dob" class="form-label">Дата рождения:</label>
+        <input type="date" class="form-control" id="dob" value="1990-01-01">
+      </div>
+
+    <button type="submit" class="btn btn-outline-light btn-sign-in">Сохранить</button>
+    <button class="btn btn-secondary mt-2" onclick="cancelEdit()">Отмена</button>
+  </form>
+</div>
+</div>
+</div>
+</div>
+
+{% endblock content %}
+{% block script %}
+<script>
+    function editProfile() {
+      document.getElementById("profileView").style.display = "none";
+      document.getElementById("profileEdit").style.display = "block";
+    }
+
+    function cancelEdit() {
+      document.getElementById("profileView").style.display = "block";
+      document.getElementById("profileEdit").style.display = "none";
+    }
+  </script>
+{% endblock script %}

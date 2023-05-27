@@ -17,10 +17,16 @@
         Меню
       </button>
       <div>
-        <a href="">
-          <button class="btn btn-outline-light btn-sign-in" type="button">Профиль</button>
-        </a>
+          <button class="btn dropdown-toggle btn-outline-light btn-sign-in" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+          User Name
+          </button>
+          <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuButton1">
+            <li><a class="dropdown-item" href="/user_pa/profile">Профиль</a></li>
+            <li><hr class="dropdown-divider"></li>
+            <li><a class="dropdown-item btn-out text-danger" href="#">Выйти</a></li>
+          </ul>
       </div>
+    </div>
   </nav>
 
   <div class="offcanvas offcanvas-start" tabindex="-1" id="sidebar" aria-labelledby="sidebarLabel">
@@ -29,12 +35,19 @@
       <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
     </div>
     <div class="offcanvas-body">
-      <!-- здесь размещаем содержимое меню -->
+      <div class="list-group">
+        {% block menu %}
+        <a href="#" class="list-group-item list-group-item-action act" aria-current="true">
+          Запись
+        </a>
+        {% endblock menu %}
+      </div>
     </div>
   </div>
     {% block content %}
     
-    {% endblock  %}
+    {% endblock content %}
     <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
+    {% block script %}{% endblock script %}
 </body>
 </html>

@@ -82,6 +82,9 @@ def reg(reguest):
 def user_pa_view(reguest):
     return render(reguest, 'user_pa/user_pa.html')
 
+def profile_view(reguest):
+    return render(reguest, 'user_pa/profile.html')
+
 # def handlerDateBaseTest(request):
     # user = CustomUser()
     # user.name = 'George'
