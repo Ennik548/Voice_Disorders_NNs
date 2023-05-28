@@ -80,11 +80,10 @@ def reg(reguest):
         return render(reguest, 'sign_in/reg.html')
 
 def user_pa_view(reguest):
+    if reguest.method == "POST":
+        vawFile = reguest.FILES['wavFile']
+
     return render(reguest, 'user_pa/user_pa.html')
 
 def profile_view(reguest):
     return render(reguest, 'user_pa/profile.html')
-
-# def handlerDateBaseTest(request):
-    # user = CustomUser()
-    # user.name = 'George'
