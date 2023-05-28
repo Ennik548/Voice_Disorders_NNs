@@ -1,10 +1,6 @@
-import datetime
-
-from django.db import models
-from django.utils import timezone
-
+import django.utils.timezone
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager
-
+from django.db import models
 
 # Create your models here.
 
@@ -28,7 +24,7 @@ class CustomUser(AbstractBaseUser):
     name = models.CharField(max_length=30)
     surname = models.CharField(max_length=30)
     sex = models.BooleanField(default=False)
-    dateOfBithday = models.DateTimeField(default=django.utils.timezone.now)
+    dateOfBithday = models.DateTimeField(default=django.utils.timezone.now())
     email = models.EmailField(unique=True)
     password = models.CharField(max_length=16)
     role = models.BooleanField(default=False)
