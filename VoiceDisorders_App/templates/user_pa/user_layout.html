@@ -39,22 +39,27 @@
       document.addEventListener('DOMContentLoaded', function() {
         var form = document.querySelector('form');
         var spinner = document.getElementById('loading-spinner');
+        var fileInput = document.querySelector('input[type="file"]');
+        var submitButton = document.querySelector('button[type="submit"]');
     
         // При отправке формы
-        form.addEventListener('submit', function() {
-          // Показать spinner-border
-          spinner.classList.remove('invisible');
-          spinner.classList.add('visible');
+        form.addEventListener('submit', function(event) {
+          // Проверяем, было ли событие change на элементе fileInput и кнопка submit нажата
+          if (fileInput.value && event.submitter === submitButton) {
+            // Удаляем класс invisible
+            spinner.classList.remove('invisible');
+          }
         });
     
         // После завершения загрузки файла
-        form.addEventListener('submit', function() {
-          // Скрыть spinner-border
-          spinner.classList.remove('visible');
+        form.addEventListener('load', function() {
+          // Добавляем класс invisible
           spinner.classList.add('invisible');
         });
       });
     </script>
+    
+
     <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
     
 </body>
