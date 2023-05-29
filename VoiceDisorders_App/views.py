@@ -32,7 +32,7 @@ def sign_in_view(reguest):
 
         if (allUser.filter(email=user.email)):
             if (allUser.filter(password=user.password)):
-                messages.info(reguest, 'Success!')
+                # messages.info(reguest, 'Success!')
                 return render(reguest, 'user_pa/user_pa.html')
             else:
                 messages.info(reguest, 'Incorrect password!')
@@ -41,7 +41,8 @@ def sign_in_view(reguest):
             messages.info(reguest, 'User wasn\'t found')
             return render(reguest, 'sign_in/sign_in.html')
 
-    return render(reguest, 'sign_in/sign_in.html')
+    else:
+        return render(reguest, 'sign_in/sign_in.html')
 
 
 def reg(reguest):
@@ -99,7 +100,8 @@ def user_pa_view(reguest):
                 # return HttpResponse('NE BOLEN')
                 messages.info(reguest, 'NE BOLEN')
                 return render(reguest, 'user_pa/user_pa.html')
-    return render(reguest, 'user_pa/user_pa.html')
+    else:
+        return render(reguest, 'user_pa/user_pa.html')
 
 
 def profile_view(reguest):

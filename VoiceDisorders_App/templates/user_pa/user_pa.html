@@ -7,10 +7,10 @@
 <a href="#" class="list-group-item list-group-item-action act" aria-current="true">
   Запись
 </a>
-<a href="/user_pa/profile" class="list-group-item list-group-item-action" aria-current="true">
-  Профиль
-</a>
-<a href="#" class="list-group-item list-group-item-action" aria-current="true">
+{#<a href="/user_pa/profile" class="list-group-item list-group-item-action" aria-current="true">#}
+{#  Профиль#}
+{#</a>#}
+<a href="/sign_in" class="list-group-item list-group-item-action" aria-current="true">
   Выйти
 </a>
 {% endblock menu %}
@@ -20,16 +20,19 @@
     <div class="container d-flex flex-column align-items-center mb-3">
     <p class="mt-3 fw-normal text-center">Загрузите аудиозапись</p>
 
-    <form action="upload.php" method="post" enctype="multipart/form-data">
+    <form method="post" enctype="multipart/form-data" action="/user_pa/"> {% csrf_token %}
+        {% if messages %}
+            {% for message in messages %}
+                {% if message.tags %}  <script>alert("{{ message }}")</script> {% endif %}
+            {% endfor %}
+        {% endif %}
         <div class="input-group mb-3">
-          <input type="file" class="form-control" name="wavfile" accept=".wav">
+          <input type="file" class="form-control" name="wavFile" accept=".wav">
         </div>
         <button type="submit" class="btn btn-outline-light btn-sign-in">Загрузить</button>
-    </form>
     </div>
     <div class="d-flex justify-content-center">
       <div id="loading-spinner" class="spinner-border invisible" role="status">
-        <span class="visually-hidden">Загрузка...</span>
       </div>
     </div>
       <table class="table table-striped mt-5">
@@ -42,18 +45,19 @@
         </thead>
         <tbody>
           <tr>
-            <th scope="row">1</th>
-            <td>Date</td>
-            <td>Result</td>
+            <th scope="row" name="row1_col1" value="{{ row1_col1 }}">1</th>
+            <td name="row1_col2" value="{{ row1_col2 }}">Date</td>
+            <td name="row1_col3" value="{{ row1_col3 }}">Result</td>
           </tr>
           <tr>
-            <th scope="row">2</th>
-            <td>Date</td>
-            <td>Result</td>
+            <th scope="row" name="row2_col1" value="{{ row2_col1 }}">2</th>
+            <td name="row2_col2" value="{{ row2_col2 }}">Date</td>
+            <td name="row2_col3" value="{{ row2_col3 }}">Result</td>
           </tr>
         </tbody>
       </table>
     </div>
+    </form>
 </div>
 
 {% endblock content%}
