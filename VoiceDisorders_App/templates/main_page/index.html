@@ -4,40 +4,37 @@
 {% block title %}Добро пожаловать{% endblock title %}
 
 {% block content%}
-<header>
-        <div class="container">
-            <div class="row mt-3">
-                <div class="col-12">
-                    <h1 class="text-center text-black">Привет!</h1>
-                </div>
-            </div>
-            <div class="row mt-2 mb-3">
-                <div class="col-12">
-                    <h2 class="text-center text-black">Добро пожаловать в {name}!</h2>
-                </div>
-            </div>
-            <div class="row">
-                <div class="col-12">
-                    <p class="text-black">Мы занимаемся разработкой проекта под название: "Распознавание нарушений голоса с применением реккурентных нейронных сетей".<br> В его функционал входит диагностирование преблемы нарушения голоса у пациента, а также предположение возможных причин</p>
-                    <p class="text-black">Наша система позволяет c точностью до {xx} % определить проблему нарушения голоса,<br> а также дать рекомендацию о том, что есть необходимость обратиться за консультацией к специалисту</p>
-                    <p class="text-black">Наш проект также будет полезен для практикующих врачей, так как он упрощает и ускоряет процесс диагностики</p>
-                </div>
-            </div>
-            <div class="row">
-            </div>
-            <div class="row row-about mt-5">
-                <div class="col-6">
-                    <h2 class="text-start text-black">О нас</h2>
-                    <p class="text-start text-black"><em>Группа № 4 ДПО под</em><br><em>руководством Смиронова А.А.</em></p>
-                </div>
-                <div class="col-6">
-                    <h2 class="text-start text-black">Контакты</h2>
-                    <p class="text-start text-black"><em>Будем рады обратной связи!</em><br><a href="https://t.me" target="_blank"><em>Наш телеграм чат с поддержкой</em></a></p>
-                </div>
+<div class="container-fluid">
+    <div class="container">
+        <div class="row align-items-end" style="height: 90vh;">
+            <div class="col-12 d-flex flex-column justify-content-start">
+                <h1 class="text-start text-white">Привет !</h1>
+                <h2 class="text-start text-white mt-2">Добро пожаловать к РЕАЛЬНЫМ КАБАНАМ!</h2>
             </div>
         </div>
-</header>
-<footer id="footer">
-
-</footer>
+        <div class="row align-items-end" style="height: 10vh;">
+            <div class="col-12 d-flex flex-column justify-content-start">
+            </div>
+        </div>
+        <div id="abouttext" class="row mt-2">
+            <div class="col-12">
+                <p class="text-start text-white">Мы занимаемся разработкой проекта под название:<br>"Распознавание нарушений голоса с применением реккурентных нейронных сетей".<br> В его функционал входит диагностирование преблемы нарушения голоса у пациента,<br>а также предположение возможных причин</p>
+                <p class="text-start text-white">Наша система позволяет c точностью до {xx} % определить проблему нарушения голоса,<br> а также дать рекомендацию о том,<br>что есть необходимость обратиться за консультацией к специалисту</p>
+                <p class="text-start text-white">Наш проект также будет полезен для практикующих врачей,<br>так как он упрощает и ускоряет процесс диагностики</p>
+            </div>
+        </div>
+            <div class="row">
+            </div>
+            <div id="contacttext" class="row row-about mt-5">
+                <div class="col-6">
+                    <h2 class="text-start text-white">О нас</h2>
+                    <p class="text-start text-white"><em>Группа № 4 ДПО под</em><br><em>руководством Смиронова А.А.</em></p>
+                </div>
+                <div class="col-6">
+                    <h2 class="text-start text-white">Контакты</h2>
+                    <p class="text-start text-white"><em>Будем рады обратной связи!</em><br><a href="https://t.me" target="_blank"><em>Наш телеграм чат с поддержкой</em></a></p>
+                </div>
+            </div>
+     </div>
+</div>
 {% endblock content%}
