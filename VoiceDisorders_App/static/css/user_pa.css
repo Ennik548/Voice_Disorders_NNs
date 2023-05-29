@@ -1,0 +1,27 @@
+body{
+    background-color: #f6f6f6;
+}
+
+.navbar-custom {
+    background-color: #023246;
+}
+
+.btn-sign-in {
+    background-color: #287094;
+    min-width: 100px;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.act {
+    background-color: #023246;
+    color: white;
+}
+
+.progress {
+    background-color: #287094;
+}

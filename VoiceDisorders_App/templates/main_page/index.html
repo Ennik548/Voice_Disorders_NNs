@@ -1,0 +1,43 @@
+{% extends 'main_page/layout.html' %}
+{% load static %}
+
+{% block title %}Добро пожаловать{% endblock title %}
+
+{% block content%}
+<header>
+        <div class="container">
+            <div class="row mt-3">
+                <div class="col-12">
+                    <h1 class="text-center text-black">Привет!</h1>
+                </div>
+            </div>
+            <div class="row mt-2 mb-3">
+                <div class="col-12">
+                    <h2 class="text-center text-black">Добро пожаловать в {name}!</h2>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-12">
+                    <p class="text-center text-black">Мы занимаемся разработкой проекта под название: "Распознавание нарушений голоса с применением реккурентных нейронных сетей".<br> В его функционал входит диагностирование преблемы нарушения голоса у пациента, а также предположение возможных причин</p>
+                    <p class="text-center text-black">Наша система позволяет c точностью до {xx} % определить проблему нарушения голоса,<br> а также дать рекомендацию о том, что есть необходимость обратиться за консультацией к специалисту</p>
+                    <p class="text-center text-black">Наш проект также будет полезен для практикующих врачей, так как он упрощает и ускоряет процесс диагностики</p>
+                </div>
+            </div>
+            <div class="row">
+            </div>
+            <div class="row row-about mt-5">
+                <div class="col-6">
+                    <h2 class="text-start text-black">О нас</h2>
+                    <p class="text-start text-black"><em>Группа № 4 ДПО под</em><br><em>руководством Смиронова А.А.</em></p>
+                </div>
+                <div class="col-6">
+                    <h2 class="text-start text-black">Контакты</h2>
+                    <p class="text-start text-black"><em>Будем рады обратной связи!</em><br><a href="https://t.me" target="_blank"><em>Наш телеграм чат с поддержкой</em></a></p>
+                </div>
+            </div>
+        </div>
+</header>
+<footer id="footer">
+
+</footer>
+{% endblock content%}
