@@ -92,12 +92,12 @@ def user_pa_view(reguest):
         with tempfile.NamedTemporaryFile(delete=False) as wavTemp:
             wavTemp.write(content)
             if network_inference(wavTemp.name):
-                return HttpResponse('BOLEN')
-                # messages.info(reguest, 'BOLEN')
+                # return HttpResponse('BOLEN')
+                messages.info(reguest, 'BOLEN')
                 return render(reguest, 'user_pa/user_pa.html')
             else:
-                return HttpResponse('NE BOLEN')
-                # messages.info(reguest, 'NE BOLEN')
+                # return HttpResponse('NE BOLEN')
+                messages.info(reguest, 'NE BOLEN')
                 return render(reguest, 'user_pa/user_pa.html')
     return render(reguest, 'user_pa/user_pa.html')
 
