@@ -9,9 +9,12 @@ from django.contrib import messages
 
 from django.core.exceptions import ObjectDoesNotExist, MultipleObjectsReturned
 
+from django.core.files.uploadedfile import TemporaryUploadedFile
+
 # Create your views here.
 def index(reguest):
     return render(reguest, 'main_page/index.html')
+
 
 def sign_in_view(reguest):
     if reguest.method == "POST":
@@ -22,22 +25,23 @@ def sign_in_view(reguest):
             password=data.get('userPassword')
         )
 
-        if(len(user.email) == 0 or len(user.password) == 0):
+        if (len(user.email) == 0 or len(user.password) == 0):
             messages.info(reguest, 'Set all fields!')
             return render(reguest, 'sign_in/sign_in.html')
 
-        if(allUser.filter(email=user.email)):
-            if(allUser.filter(password=user.password)):
+        if (allUser.filter(email=user.email)):
+            if (allUser.filter(password=user.password)):
                 messages.info(reguest, 'Success!')
                 return render(reguest, 'user_pa/user_pa.html')
             else:
-                messages.info(reguest, 'Incorrect password!' )
+                messages.info(reguest, 'Incorrect password!')
                 return render(reguest, 'sign_in/sign_in.html')
         else:
             messages.info(reguest, 'User wasn\'t found')
             return render(reguest, 'sign_in/sign_in.html')
 
     return render(reguest, 'sign_in/sign_in.html')
+
 
 def reg(reguest):
     if reguest.method == "POST":
@@ -53,13 +57,13 @@ def reg(reguest):
                 role=data.get('userRole')
             )
 
-            if(len(user.dateOfBithday) == 0):
+            if (len(user.dateOfBithday) == 0):
                 messages.info(reguest, 'Set all fields!')
                 return render(reguest, 'sign_in/reg.html')
 
             allUser = CustomUser.objects.all()
 
-            if(allUser.get(email=user.email)):
+            if (allUser.get(email=user.email)):
                 messages.info(reguest, 'Error!'
                                        'This email has been used!')
                 return render(reguest, 'sign_in/reg.html')
@@ -70,7 +74,7 @@ def reg(reguest):
 
         except ObjectDoesNotExist:
             messages.info(reguest, 'Any ObjectDoesNotExist'
-                                    'User was created!')
+                                   'User was created!')
             user.save()
             # return HttpResponse("DONE!")
             return render(reguest, 'sign_in/sign_in.html')
@@ -79,11 +83,14 @@ def reg(reguest):
     else:
         return render(reguest, 'sign_in/reg.html')
 
+
 def user_pa_view(reguest):
     if reguest.method == "POST":
-        vawFile = reguest.FILES['wavFile']
-
+        wavFile = reguest.FILES['wavFile']
+        # if(funcName(wavFile.temporary_file_path())):
+        # write there.....
     return render(reguest, 'user_pa/user_pa.html')
+
 
 def profile_view(reguest):
     return render(reguest, 'user_pa/profile.html')
