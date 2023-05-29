@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'VoiceDisorders_App.apps.VoicedisordersAppConfig',
+    'VoiceDisorders_App.NeuralNetwork'
 ]
 
 MIDDLEWARE = [

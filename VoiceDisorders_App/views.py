@@ -1,3 +1,4 @@
+import tempfile
 from xmlrpc.client import Boolean
 
 from django.shortcuts import render
@@ -8,6 +9,8 @@ from django.http import HttpResponseRedirect, HttpResponse
 from django.contrib import messages
 
 from django.core.exceptions import ObjectDoesNotExist, MultipleObjectsReturned
+
+from VoiceDisorders_App.NeuralNetwork.nn import network_inference
 
 # Create your views here.
 def index(reguest):
@@ -81,7 +84,16 @@ def reg(reguest):
 
 def user_pa_view(reguest):
     if reguest.method == "POST":
-        vawFile = reguest.FILES['wavFile']
+        wavFile = reguest.FILES['wavFile']
+        content = wavFile.read()
+        with tempfile.NamedTemporaryFile(delete=False) as wavTemp:
+            wavTemp.write(content)
+            if network_inference(wavTemp.name):
+                messages.info(reguest, 'BOLEN')
+                return render(reguest, 'user_pa/user_pa.html')
+            else:
+                messages.info(reguest, 'NE BOLEN')
+                return render(reguest, 'user_pa/user_pa.html')
 
     return render(reguest, 'user_pa/user_pa.html')
 
