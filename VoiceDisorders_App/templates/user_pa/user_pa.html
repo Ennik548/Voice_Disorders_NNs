@@ -17,7 +17,7 @@
 
 {% block content%}
 <div class="container">
-    <div class="container d-flex flex-column align-items-center mb-3">
+    <div class="container d-flex flex-column align-items-center mb-4">
     <p class="mt-3 fw-normal text-center">Загрузите аудиозапись</p>
 
     <form method="post" enctype="multipart/form-data" action="/user_pa/"> {% csrf_token %}
@@ -26,10 +26,12 @@
                 {% if message.tags %}  <script>alert("{{ message }}")</script> {% endif %}
             {% endfor %}
         {% endif %}
-        <div class="input-group mb-3">
-          <input type="file" class="form-control" name="wavFile" accept=".wav">
+        <div class="input-group mb-4">
+          <div class="input-group">
+            <input type="file" class="form-control" name="wavFile" accept=".wav" id="inputGroupFile04" aria-describedby="inputGroupFileAddon04" aria-label="Загрузка">
+            <button type="submit" class="btn btn-outline-light btn-sign-in" type="button" id="inputGroupFileAddon04">Загрузить</button>
+          </div>
         </div>
-        <button type="submit" class="btn btn-outline-light btn-sign-in">Загрузить</button>
         <div class="d-flex justify-content-center mt-4">
           <div id="loading-spinner" class="spinner-border invisible" role="status">
           </div>
