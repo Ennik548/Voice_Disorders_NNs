@@ -1,9 +1,12 @@
+import logging
 import tempfile
 from xmlrpc.client import Boolean
-
+from django.utils import timezone
 from django.shortcuts import render
 from VoiceDisorders_App.models import CustomUser
 
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth import authenticate, login
 from django.http import HttpResponseRedirect, HttpResponse
 
 from django.contrib import messages
@@ -12,6 +15,7 @@ from django.core.exceptions import ObjectDoesNotExist, MultipleObjectsReturned
 
 from VoiceDisorders_App.NeuralNetwork.nn import network_inference
 
+from django.contrib import sessions
 # Create your views here.
 def index(reguest):
     return render(reguest, 'main_page/index.html')
@@ -33,6 +37,7 @@ def sign_in_view(reguest):
         if (allUser.filter(email=user.email)):
             if (allUser.filter(password=user.password)):
                 # messages.info(reguest, 'Success!')
+                reguest.session['email'] = user.email
                 return render(reguest, 'user_pa/user_pa.html')
             else:
                 messages.info(reguest, 'Incorrect password!')
@@ -85,24 +90,34 @@ def reg(reguest):
     else:
         return render(reguest, 'sign_in/reg.html')
 
-
 def user_pa_view(reguest):
+    user_email = reguest.session['email']
+    user = CustomUser.objects.get(email=user_email)
+
+    print(user.last_result_date)
+
     if reguest.method == "POST":
         wavFile = reguest.FILES['wavFile']
         content = wavFile.read()
         with tempfile.NamedTemporaryFile(delete=False) as wavTemp:
             wavTemp.write(content)
             if network_inference(wavTemp.name):
-                # return HttpResponse('BOLEN')
-                messages.info(reguest, 'BOLEN')
-                return render(reguest, 'user_pa/user_pa.html')
+                user.last_result = True
+                user.last_result_date = timezone.now()
+                user.save()
+                messages.info(reguest, 'Человек болен!')
+                return render(reguest, 'user_pa/user_pa.html', {'lastDate': user.last_result_date, 'lastResult': 'БОЛЕН'})
             else:
-                # return HttpResponse('NE BOLEN')
-                messages.info(reguest, 'NE BOLEN')
-                return render(reguest, 'user_pa/user_pa.html')
+                user.last_result = False
+                user.last_result_date = timezone.now()
+                user.save()
+                messages.info(reguest, 'Человек здоров!')
+                return render(reguest, 'user_pa/user_pa.html', {'lastDate': user.last_result_date, 'lastResult': 'ЗДОРОВ'})
     else:
-        return render(reguest, 'user_pa/user_pa.html')
-
+        if(user.last_result == True):
+            return render(reguest, 'user_pa/user_pa.html', {'lastDate': user.last_result_date, 'lastResult': 'БОЛЕН'})
+        else:
+            return render(reguest, 'user_pa/user_pa.html', {'lastDate': user.last_result_date, 'lastResult': 'ЗДОРОВ'})
 
 def profile_view(reguest):
     return render(reguest, 'user_pa/profile.html')

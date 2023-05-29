@@ -80,11 +80,11 @@ WSGI_APPLICATION = 'VoiceDisorders.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        # 'NAME': 'django_project_db',
-        # 'USER': 'myprojectuser',
-        # 'PASSWORD': 'password',
-        # 'HOST': 'localhost',
-        # 'PORT': '',
+        'NAME': 'django_project_db',
+        'USER': 'myprojectuser',
+        'PASSWORD': 'password',
+        'HOST': 'localhost',
+        'PORT': '',
     }
 }
 
@@ -114,7 +114,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Europe/Moscow'
 
 USE_I18N = True
 
