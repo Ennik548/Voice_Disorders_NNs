@@ -71,7 +71,7 @@ def reg(reguest):
                 sex=Boolean(data.get('userSex')),
                 email=data.get('userEmail'),
                 password=data.get('userPassword'),
-                role=data.get('userRole')
+                role=False
             )
 
             if (len(user.dateOfBithday) == 0):
