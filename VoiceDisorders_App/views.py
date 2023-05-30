@@ -104,8 +104,13 @@ def user_pa_view(reguest):
     sign_user = CustomUser.objects.get(id=user_id)
 
     if reguest.method == "POST":
+        if reguest.FILES.get('wavFile') == None:
+            messages.info(reguest, 'Загрузите данные!!!')
+            return render(reguest, 'user_pa/user_pa.html', )
+
         wavFile = reguest.FILES['wavFile']
         content = wavFile.read()
+
         with tempfile.NamedTemporaryFile(delete=False) as wavTemp:
             wavTemp.write(content)
             if network_inference(wavTemp.name):
