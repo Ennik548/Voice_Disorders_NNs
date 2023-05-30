@@ -30,7 +30,7 @@ class CustomUser(AbstractBaseUser):
     role = models.BooleanField(default=False)
     last_result = models.BooleanField(default=False)
     last_result_date = models.DateTimeField(default=timezone.now)
-    is_active = models.BooleanField(default=True)
+    is_active = models.BooleanField(default=False)
     is_staff = models.BooleanField(default=False)
 
     USERNAME_FIELD = 'email'
