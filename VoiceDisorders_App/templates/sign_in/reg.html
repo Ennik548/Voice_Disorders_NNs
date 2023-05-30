@@ -8,6 +8,7 @@
     <link rel="shortcut icon" href="{% static 'img/icons8-moon-96.png' %}" type='image/x-icon'>
     <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
     <link rel="stylesheet" href="{% static 'css/reg.css' %}">
+    <title>Регистрация</title>
 </head>
 <body class="text-center">    
   <main class="form-signin">
@@ -59,15 +60,6 @@
       <div class="form-floating mb-2">
         <input type="password" class="form-control" id="floatingPassword" placeholder="Password">
         <label for="floatingPassword">Повторите пароль</label>
-      </div>
-
-      <div class="form-floating mb-2">
-        <select class="form-select" id="floatingSelect" name='userRole' aria-label="Floating label select example">
-          <option selected>Откройте это меню выбора</option>
-          <option value="0">Пациент</option>
-          <option value="1">Доктор</option>
-        </select>
-        <label for="floatingSelect">Кто вы?</label>
       </div>
 
       <button type="submit" class="btn w-100 btn-outline-light btn-reg d-flex justify-content-center align-items-center">Зарегистрироваться</button>

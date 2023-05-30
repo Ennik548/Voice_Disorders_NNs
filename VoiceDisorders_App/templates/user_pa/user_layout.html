@@ -16,38 +16,56 @@
       <button class="btn btn-outline-light btn-sign-in" type="button" data-bs-toggle="offcanvas" data-bs-target="#sidebar" aria-controls="sidebar">
         Меню
       </button>
-      <div>
-          <button class="btn dropdown-toggle btn-outline-light btn-sign-in" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-          User Name
-          </button>
-          <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdownMenuButton1">
-            <li><a class="dropdown-item" href="/user_pa/profile">Профиль</a></li>
-            <li><hr class="dropdown-divider"></li>
-            <li><a class="dropdown-item btn-out text-danger" href="#">Выйти</a></li>
-          </ul>
-      </div>
     </div>
   </nav>
-
   <div class="offcanvas offcanvas-start" tabindex="-1" id="sidebar" aria-labelledby="sidebarLabel">
-    <div class="offcanvas-header">
-      <h5 class="offcanvas-title" id="sidebarLabel">Меню</h5>
-      <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-    </div>
-    <div class="offcanvas-body">
-      <div class="list-group">
-        {% block menu %}
-        <a href="#" class="list-group-item list-group-item-action act" aria-current="true">
-          Запись
-        </a>
-        {% endblock menu %}
+      <div class="offcanvas-header">
+        <h5 class="offcanvas-title" id="sidebarLabel">Меню</h5>
+        <button type="button" class="btn-close text-reset" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+      </div>
+      <div class="offcanvas-body d-flex flex-column justify-content-between">
+        <div class="list-group">
+          {% block menu %}
+
+          {% endblock menu %}
+        
+        </div>
+        <div class="d-grid gap-2 justify-content-center">
+          <a href="/sign_in">
+            <button class="btn btn-outline-light btn-lg btn-danger" type="button">Выйти</button>
+          </a>
+        </div>
       </div>
     </div>
-  </div>
     {% block content %}
     
     {% endblock content %}
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        var form = document.querySelector('form');
+        var spinner = document.getElementById('loading-spinner');
+        var fileInput = document.querySelector('input[type="file"]');
+        var submitButton = document.querySelector('button[type="submit"]');
+    
+        // При отправке формы
+        form.addEventListener('submit', function(event) {
+          // Проверяем, было ли событие change на элементе fileInput и кнопка submit нажата
+          if (fileInput.value && event.submitter === submitButton) {
+            // Удаляем класс invisible
+            spinner.classList.remove('invisible');
+          }
+        });
+    
+        // После завершения загрузки файла
+        form.addEventListener('load', function() {
+          // Добавляем класс invisible
+          spinner.classList.add('invisible');
+        });
+      });
+    </script>
+    
+
     <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
-    {% block script %}{% endblock script %}
+    
 </body>
 </html>

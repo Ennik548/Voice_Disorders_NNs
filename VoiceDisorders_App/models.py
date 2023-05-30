@@ -28,7 +28,9 @@ class CustomUser(AbstractBaseUser):
     email = models.EmailField(unique=True)
     password = models.CharField(max_length=16)
     role = models.BooleanField(default=False)
-    is_active = models.BooleanField(default=True)
+    last_result = models.BooleanField(default=False)
+    last_result_date = models.DateTimeField(default=timezone.now)
+    is_active = models.BooleanField(default=False)
     is_staff = models.BooleanField(default=False)
 
     USERNAME_FIELD = 'email'
