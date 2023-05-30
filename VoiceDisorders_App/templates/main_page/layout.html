@@ -41,6 +41,25 @@
     {% block content %}
     
     {% endblock  %}
+    <script>
+      document.addEventListener("DOMContentLoaded", function() {
+        var navbar = document.querySelector(".navbar-collapse");
+        var navItems = document.querySelectorAll(".navbar-nav .nav-link");
+    
+        document.addEventListener("click", function(event) {
+          var target = event.target;
+          if (!navbar.contains(target)) {
+            navbar.classList.remove("show");
+          }
+        });
+    
+        navItems.forEach(function(item) {
+          item.addEventListener("click", function() {
+            navbar.classList.remove("show");
+          });
+        });
+      });
+    </script>
     <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
 </body>
 </html>
