@@ -25,21 +25,25 @@ def sign_in_view(reguest):
     if reguest.method == "POST":
         data = reguest.POST
         allUser = CustomUser.objects.all()
-        user = CustomUser(
+        temp_user = CustomUser(
             email=data.get('userEmail'),
             password=data.get('userPassword')
         )
 
-        if (len(user.email) == 0 or len(user.password) == 0):
+        if (len(temp_user.email) == 0 or len(temp_user.password) == 0):
             messages.info(reguest, 'Set all fields!')
             return render(reguest, 'sign_in/sign_in.html')
 
-        if (allUser.filter(email=user.email)):
-            if (allUser.filter(password=user.password)):
-                # messages.info(reguest, 'Success!')
-                reguest.session['email'] = user.email
-                sign_user = CustomUser.objects.get(email=reguest.session['email'])
-                if (sign_user.last_result == True):
+        if (allUser.filter(email=temp_user.email)):
+            if (allUser.filter(password=temp_user.password)):
+                sign_user = CustomUser.objects.get(email=temp_user.email)
+                reguest.session['id'] = sign_user.id
+                if (sign_user.is_active == False):
+                    sign_user.is_active = True
+                    sign_user.save()
+                    return render(reguest, 'user_pa/user_pa.html',
+                                  {'lastDate': 'Данных нет', 'lastResult': ''})
+                elif(sign_user.last_result == True):
                     return render(reguest, 'user_pa/user_pa.html',
                                   {'lastDate': sign_user.last_result_date, 'lastResult': 'БОЛЕН'})
                 else:
@@ -89,7 +93,6 @@ def reg(reguest):
             messages.info(reguest, 'Any ObjectDoesNotExist'
                                    'User was created!')
             user.save()
-            # return HttpResponse("DONE!")
             return render(reguest, 'sign_in/sign_in.html')
         # except MultipleObjectsReturned:
 
@@ -97,10 +100,8 @@ def reg(reguest):
         return render(reguest, 'sign_in/reg.html')
 
 def user_pa_view(reguest):
-    user_email = reguest.session['email']
-    user = CustomUser.objects.get(email=user_email)
-
-    print(user.last_result_date)
+    user_id = reguest.session['id']
+    sign_user = CustomUser.objects.get(id=user_id)
 
     if reguest.method == "POST":
         wavFile = reguest.FILES['wavFile']
@@ -108,22 +109,22 @@ def user_pa_view(reguest):
         with tempfile.NamedTemporaryFile(delete=False) as wavTemp:
             wavTemp.write(content)
             if network_inference(wavTemp.name):
-                user.last_result = True
-                user.last_result_date = timezone.now()
-                user.save()
-                messages.info(reguest, 'Человек болен!')
-                return render(reguest, 'user_pa/user_pa.html', {'lastDate': user.last_result_date, 'lastResult': 'БОЛЕН'})
+                sign_user.last_result = True
+                sign_user.last_result_date = timezone.now()
+                sign_user.save()
+                # messages.info(reguest, 'Человек болен!')
+                return render(reguest, 'user_pa/user_pa.html', {'lastDate': sign_user.last_result_date, 'lastResult': 'БОЛЕН'})
             else:
-                user.last_result = False
-                user.last_result_date = timezone.now()
-                user.save()
-                messages.info(reguest, 'Человек здоров!')
-                return render(reguest, 'user_pa/user_pa.html', {'lastDate': user.last_result_date, 'lastResult': 'ЗДОРОВ'})
+                sign_user.last_result = False
+                sign_user.last_result_date = timezone.now()
+                sign_user.save()
+                # messages.info(reguest, 'Человек здоров!')
+                return render(reguest, 'user_pa/user_pa.html', {'lastDate': sign_user.last_result_date, 'lastResult': 'ЗДОРОВ'})
     else:
-        if(user.last_result == True):
-            return render(reguest, 'user_pa/user_pa.html', {'lastDate': user.last_result_date, 'lastResult': 'БОЛЕН'})
+        if(sign_user.last_result == True):
+            return render(reguest, 'user_pa/user_pa.html', {'lastDate': sign_user.last_result_date, 'lastResult': 'БОЛЕН'})
         else:
-            return render(reguest, 'user_pa/user_pa.html', {'lastDate': user.last_result_date, 'lastResult': 'ЗДОРОВ'})
+            return render(reguest, 'user_pa/user_pa.html', {'lastDate': sign_user.last_result_date, 'lastResult': 'ЗДОРОВ'})
 
 def profile_view(reguest):
     return render(reguest, 'user_pa/profile.html')
