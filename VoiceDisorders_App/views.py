@@ -38,7 +38,13 @@ def sign_in_view(reguest):
             if (allUser.filter(password=user.password)):
                 # messages.info(reguest, 'Success!')
                 reguest.session['email'] = user.email
-                return render(reguest, 'user_pa/user_pa.html')
+                sign_user = CustomUser.objects.get(email=reguest.session['email'])
+                if (sign_user.last_result == True):
+                    return render(reguest, 'user_pa/user_pa.html',
+                                  {'lastDate': sign_user.last_result_date, 'lastResult': 'БОЛЕН'})
+                else:
+                    return render(reguest, 'user_pa/user_pa.html',
+                                  {'lastDate': sign_user.last_result_date, 'lastResult': 'ЗДОРОВ'})
             else:
                 messages.info(reguest, 'Incorrect password!')
                 return render(reguest, 'sign_in/sign_in.html')
