@@ -14,7 +14,7 @@
   <nav class="navbar navbar-expand-lg navbar-dark navbar-custom fixed-top">
     <div class="container-fluid">
         <div>
-          <a class="navbar-brand text-uppercase" href="#maintext">Powered By Ennik</a>
+          <a class="navbar-brand text-uppercase display-4" href="#maintext">\(V_A)/</a>
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
           </button>
@@ -41,6 +41,25 @@
     {% block content %}
     
     {% endblock  %}
+    <script>
+      document.addEventListener("DOMContentLoaded", function() {
+        var navbar = document.querySelector(".navbar-collapse");
+        var navItems = document.querySelectorAll(".navbar-nav .nav-link");
+    
+        document.addEventListener("click", function(event) {
+          var target = event.target;
+          if (!navbar.contains(target)) {
+            navbar.classList.remove("show");
+          }
+        });
+    
+        navItems.forEach(function(item) {
+          item.addEventListener("click", function() {
+            navbar.classList.remove("show");
+          });
+        });
+      });
+    </script>
     <script src="{% static 'js/bootstrap.bundle.min.js' %}"></script>
 </body>
 </html>
